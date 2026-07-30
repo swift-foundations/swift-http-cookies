@@ -23,6 +23,7 @@ extension HTTPCookies {
                     }
                 }
                 return value
+
             case .percentEncoded:
                 return value.utf8.reduce(into: "") { result, byte in
                     if Self.isCookieOctet(byte) {

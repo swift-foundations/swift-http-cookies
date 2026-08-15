@@ -13,7 +13,9 @@ extension HTTPCookies {
 }
 
 extension HTTPCookies.Cookie {
-    public func headerValue(using policy: HTTPCookies.EncodingPolicy = .raw) throws(HTTPCookies.EncodingPolicy.Error) -> String {
+    public func headerValue(
+        using policy: HTTPCookies.EncodingPolicy = .raw
+    ) throws(HTTPCookies.EncodingPolicy.Error) -> String {
         "\(name)=\(try value.encoded(using: policy))"
     }
 }

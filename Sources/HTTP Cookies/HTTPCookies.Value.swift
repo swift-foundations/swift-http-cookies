@@ -15,11 +15,15 @@ extension HTTPCookies {
 }
 
 extension HTTPCookies.Value {
-    public func encoded(using policy: HTTPCookies.EncodingPolicy = .raw) throws(HTTPCookies.EncodingPolicy.Error) -> String {
+    public func encoded(
+        using policy: HTTPCookies.EncodingPolicy = .raw
+    ) throws(HTTPCookies.EncodingPolicy.Error) -> String {
         try policy.encode(string)
     }
 
-    public func decoded(using policy: HTTPCookies.EncodingPolicy = .raw) throws(HTTPCookies.EncodingPolicy.Error) -> Self {
+    public func decoded(
+        using policy: HTTPCookies.EncodingPolicy = .raw
+    ) throws(HTTPCookies.EncodingPolicy.Error) -> Self {
         Self(string: try policy.decode(string))
     }
 }

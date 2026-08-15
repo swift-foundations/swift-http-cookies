@@ -20,7 +20,10 @@ extension HTTPCookies {
                     value: .init(token: "abc123"),
                     configuration: .init(maxAge: 604_800, path: "/")
                 )
-                #expect(try cookie.headerValue() == "session=abc123; Max-Age=604800; Path=/; Secure; HttpOnly; SameSite=Lax")
+                #expect(
+                    try cookie.headerValue()
+                        == "session=abc123; Max-Age=604800; Path=/; Secure; HttpOnly; SameSite=Lax"
+                )
             }
         }
 
@@ -38,14 +41,19 @@ extension HTTPCookies {
                 let value = HTTPCookies.Value(string: "hello world/✓")
                 let encoded = try value.encoded(using: .percentEncoded)
                 #expect(encoded == "hello%20world/%E2%9C%93")
-                #expect(try HTTPCookies.Value(string: encoded).decoded(using: .percentEncoded).string == value.string)
+                #expect(
+                    try HTTPCookies.Value(string: encoded).decoded(using: .percentEncoded).string
+                        == value.string
+                )
             }
         }
 
         @Suite
         struct Integration {
             @Test
-            func `all response attributes serialize in wire order`() throws(HTTPCookies.EncodingPolicy.Error) {
+            func `all response attributes serialize in wire order`() throws(HTTPCookies
+                .EncodingPolicy.Error)
+            {
                 let cookie = HTTPCookies.SetCookie(
                     name: "id",
                     value: .init(string: "1"),
@@ -59,7 +67,10 @@ extension HTTPCookies {
                         sameSitePolicy: .strict
                     )
                 )
-                #expect(try cookie.headerValue() == "id=1; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Max-Age=0; Domain=example.com; Path=/account; SameSite=Strict")
+                #expect(
+                    try cookie.headerValue()
+                        == "id=1; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Max-Age=0; Domain=example.com; Path=/account; SameSite=Strict"
+                )
             }
         }
     }

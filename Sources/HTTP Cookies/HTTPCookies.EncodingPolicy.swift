@@ -51,7 +51,8 @@ extension HTTPCookies.EncodingPolicy {
                 bytes.append(byte)
                 continue
             }
-            guard let high = iterator.next(), let low = iterator.next(), let high = Self.hex(high), let low = Self.hex(low)
+            guard let high = iterator.next(), let low = iterator.next(), let high = Self.hex(high),
+                let low = Self.hex(low)
             else { throw .malformedPercentEscape }
             bytes.append(high << 4 | low)
         }
@@ -61,7 +62,8 @@ extension HTTPCookies.EncodingPolicy {
     }
 
     private static func isCookieOctet(_ byte: UInt8) -> Bool {
-        byte == 0x21 || 0x23...0x2B ~= byte || 0x2D...0x3A ~= byte || 0x3C...0x5B ~= byte || 0x5D...0x7E ~= byte
+        byte == 0x21 || 0x23...0x2B ~= byte || 0x2D...0x3A ~= byte || 0x3C...0x5B ~= byte
+            || 0x5D...0x7E ~= byte
     }
 
     private static func isCookieOctet(_ character: Character) -> Bool {
@@ -70,7 +72,9 @@ extension HTTPCookies.EncodingPolicy {
     }
 
     private static func hex(_ value: UInt8) -> Character {
-        "0123456789ABCDEF"["0123456789ABCDEF".index("0123456789ABCDEF".startIndex, offsetBy: Int(value))]
+        "0123456789ABCDEF"[
+            "0123456789ABCDEF".index("0123456789ABCDEF".startIndex, offsetBy: Int(value))
+        ]
     }
 
     private static func hex(_ value: UInt8) -> UInt8? {

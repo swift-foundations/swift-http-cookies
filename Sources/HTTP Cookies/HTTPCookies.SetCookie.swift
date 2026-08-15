@@ -17,7 +17,9 @@ extension HTTPCookies {
 }
 
 extension HTTPCookies.SetCookie {
-    public func headerValue(using policy: HTTPCookies.EncodingPolicy = .raw) throws(HTTPCookies.EncodingPolicy.Error) -> String {
+    public func headerValue(
+        using policy: HTTPCookies.EncodingPolicy = .raw
+    ) throws(HTTPCookies.EncodingPolicy.Error) -> String {
         [
             try cookie.headerValue(using: policy),
             configuration.expires.map { "Expires=\($0)" },
